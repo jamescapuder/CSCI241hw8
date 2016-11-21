@@ -13,10 +13,31 @@ tree* link_list(int* freqs){
 	head->right=NULL;
 	head->next=NULL;
 	for (int i=0;i<ASCII_LEN;i++){
-
+		if (freqs[i]>0){
+			tree* temp = malloc(sizeof(tree));
+			temp->character = i;
+			temp->left=NULL;
+			temp->right = NULL;
+			temp->next=NULL;
+			insert_tree(temp, head);
+		}
 	}
 }
 
+tree* insert_tree(tree* toins, tree* head){
+	tree* temp = head;
+	if (toins->freq > temp->freq){
+		while (temp->!=NULL && toins->freq > temp->next->freq){
+			temp = temp->next;
+		}
+		toins->next = temp->next;
+		temp->next = toins;
+	}else{
+		toins->next = head;
+		head=toins;
+	}
+	return head;
+}
 
 void get_freqs(int* freqs, FILE* input){
 	int c;
