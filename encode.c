@@ -1,9 +1,13 @@
 #include "huffman.h"
-#include <stdlib.h>
-#include <string.h>
-#include <limits.h>
-#include <stdio.h>
+#include<stdlib.h>
+#include<stdio.h>
+#include<limits.h>
+#include<string.h>
+#include<ctype.h>
 
+#define ASCII_LEN 255
+
+tree* insert_tree(tree* toins, tree* head);
 
 tree* link_list(int* freqs){
 	tree* head = malloc(sizeof(tree));
@@ -22,12 +26,13 @@ tree* link_list(int* freqs){
 			insert_tree(temp, head);
 		}
 	}
+	return head;
 }
 
 tree* insert_tree(tree* toins, tree* head){
 	tree* temp = head;
 	if (toins->freq > temp->freq){
-		while (temp->!=NULL && toins->freq > temp->next->freq){
+		while (temp->next!=NULL && toins->freq > temp->next->freq){
 			temp = temp->next;
 		}
 		toins->next = temp->next;
@@ -36,6 +41,7 @@ tree* insert_tree(tree* toins, tree* head){
 		toins->next = head;
 		head=toins;
 	}
+
 	return head;
 }
 
@@ -49,7 +55,7 @@ void get_freqs(int* freqs, FILE* input){
 int main(int argc, char* argv[]){
 	int freqs[ASCII_LEN];
 	char* freq_keys[ASCII_LEN];
-	char paths[ASCII_LEN]="";
+	char paths[ASCII_LEN];
 	FILE *input;
 	FILE *output;
 

@@ -1,6 +1,9 @@
 #include "huffman.h"
 #include<stdlib.h>
 #include<stdio.h>
+#include<limits.h>
+#include<string.h>
+#include<ctype.h>
 
 int leaf (tree* t){
   return (t->left==NULL && t->right==NULL)?1:0;
