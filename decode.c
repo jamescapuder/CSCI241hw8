@@ -49,7 +49,7 @@ int traverser(FILE* input, tree* head){
   return temp->character;
 }
 int bit_helper(FILE* input){
-  if (bit_help_len-->0){
+  if (bit_help_len-- > 0){
     int current_bit=0;
     if (current_byte & (1<<(CHAR_BIT-1))){
       current_bit=1;
@@ -97,4 +97,5 @@ int main(int argc, char* argv[]){
   }
   fclose(input);
   fclose(output);
+  free_tree(head);
 }

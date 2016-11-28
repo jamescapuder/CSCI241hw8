@@ -1,0 +1,26 @@
+.\" hw8 Encode man page
+.\" James Capuder - Fall 2016
+
+.TH sample_man 1 "28 November 2016" "CSCI 241" "Oberlin College"
+
+.SH NAME
+.B sample_man
+\- an example of a sample man page
+
+.SH SYNOPSIS
+.B sample_man
+[ -o outputfile ]
+<filename>
+
+.SH DESCRIPTION
+Does everything a sample man page should do.
+
+.SH OPTIONS
+.IP "-o outputfile"
+Do things to be written to an output file.
+
+.SH AUTHOR
+Benjamin Kuperman (Fall 2011)
+
+.SH BUGS
+None!

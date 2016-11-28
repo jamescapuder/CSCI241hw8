@@ -70,7 +70,7 @@ void make_code_map(char* codes[ASCII_LEN],tree*head, char code_cont[]){
 void printt(tree* head){
   if (NULL == head->left && NULL == head->right){
     printf("1");
-    printf("%d", head->character);
+    printf("%c", head->character);
   }else{
     printf("0");
     printt(head->left);
@@ -136,6 +136,7 @@ int main(int argc, char* argv[]){
 	//printf("%c: %s\n", i, freq_keys[i]);
 	//}
 	write_tree(forrest, output);
+
 	write_str(freq_keys[255], output);
 	rewind(input);
 	int ch;
@@ -148,7 +149,13 @@ int main(int argc, char* argv[]){
 	    write_str(freq_keys[ch], output);
 	    //}
 	}
+	//printt(forrest);
 	write_str(freq_keys[255],output);
+	flush_buffer(output);
+	free_tree(forrest);
 	fclose(input);
 	fclose(output);
+	for (int i=0;i<ASCII_LEN;i++){
+	  if (freq_keys[i]!=NULL){free(freq_keys[i]);}
+	}
 }

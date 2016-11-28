@@ -17,4 +17,5 @@ void free_tree(tree* t);
 void write_tree(tree* head, FILE* outfile);
 void write_bit(unsigned int to_write, FILE* outfile);
 void write_str(const char* to_w, FILE* outfile);
+void flush_buffer(FILE* outfile);
 #endif

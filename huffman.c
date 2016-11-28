@@ -66,3 +66,8 @@ void write_str(const char* to_w, FILE* outfile){
   }
 
 }
+void flush_buffer(FILE* outfile){
+  while (indy){
+    write_bit(0, outfile);
+  }
+}

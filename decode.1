@@ -1,0 +1,26 @@
+.\" hw8 Decode man page
+.\" James Capuder - Fall 2016
+
+.TH decode 1 "28 November 2016" "CSCI 241" "Oberlin College"
+
+.SH NAME
+.B decode
+\- a program to decode files encoded using the accompanying encode program
+
+.SH SYNOPSIS
+.B decode
+<filename>
+[ outfile ]
+
+.SH DESCRIPTION
+Takes <filename>, a file containing the output from the ./encode program, and writes the original contents of the encoded file to the output.
+
+.SH OPTIONS
+.IP "outfile"
+File to decompress filename to. if none specified, will write to stdout.
+
+.SH AUTHOR
+James Capuder (Fall 2016)
+
+.SH BUGS
+No bugs.
