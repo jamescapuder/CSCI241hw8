@@ -9,6 +9,15 @@
 
 tree* insert_tree(tree* toins, tree* head);
 
+void print_tree(tree* head){
+	tree* temp = head
+	while (temp != NULL){
+		printf("%c: %d\n", temp->character, temp->freq);
+		temp = temp->next;
+	}
+	printf("\n");
+}
+
 tree* link_list(int* freqs){
 	tree* head = malloc(sizeof(tree));
 	head->character = -1;
@@ -72,5 +81,7 @@ int main(int argc, char* argv[]){
 		freqs[i]=0;
 		freq_keys[i]=NULL;
 	}
-
+	get_freqs(freqs, input);
+	tree* freq_list = link_list(freqs);
+	print_tree(freq_list);
 }
