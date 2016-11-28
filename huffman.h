@@ -10,6 +10,7 @@ typedef struct tree_{
 } tree;
 //typedef struct tree_ tree;
 unsigned int contained;
+void* safe_malloc(size_t s);
 int indy;
 int leaf(tree* t);
 void free_tree(tree* t);

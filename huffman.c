@@ -4,6 +4,16 @@
 #include<limits.h>
 #include<string.h>
 #include<ctype.h>
+#include<errno.h>
+
+void* safe_malloc(size_t t){
+
+  errno = 0;
+  void* pointer = malloc(t);
+  if (errno != 0){perror("could not malloc");exit(EXIT_FAILURE);}
+  else{return pointer;}
+
+}
 
 int leaf (tree* t){
   return (t->left==NULL && t->right==NULL)?1:0;

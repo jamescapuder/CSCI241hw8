@@ -10,15 +10,15 @@
 tree* insert_tree(tree* toins, tree* head);
 
 tree* link_list(int* freqs){
-	tree* head = malloc(sizeof(tree));
+	tree* head = safe_malloc(sizeof(tree));
 	head->character = 255;
 	head->freq = 1;
 	head->left=NULL;
 	head->right=NULL;
 	head->next=NULL;
-	for (int i=0;i<ASCII_LEN;i++){
+	for (int i=0;i<ASCII_LEN-1;i++){
 		if (freqs[i]>0){
-			tree* temp = malloc(sizeof(tree));
+			tree* temp = safe_malloc(sizeof(tree));
 			temp->character = i;
 			temp->left=NULL;
 			temp->right = NULL;
@@ -37,7 +37,7 @@ tree* make_forrest(tree* head){
   while(head->next != NULL){
     l = head;
     r = head->next;
-    tree* temp = malloc(sizeof(tree));
+    tree* temp = safe_malloc(sizeof(tree));
     temp->left = l;
     temp->right = r;
     temp->next=NULL;
@@ -59,10 +59,21 @@ void make_code_map(char* codes[ASCII_LEN],tree*head, char code_cont[]){
     } else{
       strcat(code_cont, "0");
       make_code_map(codes, head->left, code_cont);
-      code_cont[strlen(code_cont)-1]=1;
+      *(code_cont + strlen(code_cont)-1)='1';
+      //strcat(code_cont, "1");
       make_code_map(codes, head->right, code_cont);
-      code_cont[strlen(code_cont)-1]='\0';
+      *(code_cont + strlen(code_cont)-1)='\0';
     }
+  }
+}
+void printt(tree* head){
+  if (NULL == head->left && NULL == head->right){
+    printf("1");
+    printf("%d", head->character);
+  }else{
+    printf("0");
+    printt(head->left);
+    printt(head->right);
   }
 }
 
@@ -126,7 +137,9 @@ int main(int argc, char* argv[]){
 	rewind(input);
 	int ch;
 	while (EOF != (ch=fgetc(input))){
-	  write_str(freq_keys[ch], output);
+	  //printf("%s", freq_keys[ch]);
+	  if (freq_keys[ch]!=NULL){
+	    write_str(freq_keys[ch], output);}
 	}
 	write_str(freq_keys[255],output);
 	fclose(input);
