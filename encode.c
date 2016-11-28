@@ -4,6 +4,7 @@
 #include<limits.h>
 #include<string.h>
 #include<ctype.h>
+#include<errno.h>
 
 #define ASCII_LEN 256
 
@@ -16,7 +17,7 @@ tree* link_list(int* freqs){
 	head->left=NULL;
 	head->right=NULL;
 	head->next=NULL;
-	for (int i=0;i<ASCII_LEN-1;i++){
+	for (int i=0;i<ASCII_LEN;i++){
 		if (freqs[i]>0){
 			tree* temp = safe_malloc(sizeof(tree));
 			temp->character = i;
@@ -24,7 +25,7 @@ tree* link_list(int* freqs){
 			temp->right = NULL;
 			temp->next=NULL;
 			temp->freq = freqs[i];
-			insert_tree(temp, head);
+			head = insert_tree(temp, head);
 			//printf("%c: %d\n", temp->character, temp->freq);
 		}
 	}
@@ -114,7 +115,9 @@ int main(int argc, char* argv[]){
 		printf("invalid input.\n usage: encode <toencode> [outfile]\n");
 		exit(EXIT_FAILURE);
 	}
+	errno=0;
 	input = fopen(argv[1], "r");
+	if (errno){exit(EXIT_FAILURE);}
 	if (argc==3){
 		output = fopen(argv[2],"w");
 	} else{
@@ -137,9 +140,13 @@ int main(int argc, char* argv[]){
 	rewind(input);
 	int ch;
 	while (EOF != (ch=fgetc(input))){
-	  //printf("%s", freq_keys[ch]);
-	  if (freq_keys[ch]!=NULL){
-	    write_str(freq_keys[ch], output);}
+	  //printf("%d: ", ch);
+	  //printf("%c: ", ch);
+	  //printf("%s\n", freq_keys[ch]);
+	  
+	  //if (freq_keys[ch]!=NULL){
+	    write_str(freq_keys[ch], output);
+	    //}
 	}
 	write_str(freq_keys[255],output);
 	fclose(input);
